@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Request</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .gif {
+            margin: 20px 0;
+            max-width: 300px;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: 80vw;
+        }
+        .yes-btn {
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        #noBtn {
+            background-color: #ff4444;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        .success-gif {
+            display: none;
+            max-width: 500px;
+        }
+        .success-text {
+            font-size: 80px;
+            color: #ff6b6b;
+            margin: 20px 0;
+            animation: bounce 1s infinite;
+            font-weight: bold;
+            text-shadow: 3px 3px 0px #ff9999;
+        }
+        .personal-message {
+            font-size: 24px;
+            color: #ff6b6b;
+            margin: 20px 0;
+            line-height: 1.5;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://media.tenor.com/kgQfUEjcSdgAAAAj/milk-and-mocha.gif" alt="Valentine's gif" class="gif">
+        <h1>Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button class="yes-btn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+        <img src="https://media.tenor.com/d2nnuVMvPbcAAAAi/milk-and-mocha-milk-and-mocha-bear.gif" alt="Success gif" class="success-gif">
+    </div>
+
+    <script>
+        const yesBtn = document.querySelector('.yes-btn');
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.container');
+        const successGif = document.querySelector('.success-gif');
+        let btnSize = 16;
+        let noBtnSize = 16;
+        let noCount = 0;
+
+        noBtn.addEventListener('click', () => {
+            noCount++;
+            noBtnSize = Math.max(8, noBtnSize - 2);
+            btnSize += 8;
+            
+            document.querySelectorAll('.yes-btn').forEach(btn => {
+                btn.style.fontSize = `${btnSize}px`;
+                btn.style.padding = `${10 + btnSize/2}px ${20 + btnSize}px`;
+            });
+            
+            noBtn.style.fontSize = `${noBtnSize}px`;
+
+            for (let i = 0; i < 2; i++) {
+                const newYesBtn = document.createElement('button');
+                newYesBtn.textContent = 'Yes';
+                newYesBtn.className = 'yes-btn';
+                newYesBtn.style.fontSize = `${btnSize}px`;
+                newYesBtn.style.padding = `${10 + btnSize/2}px ${20 + btnSize}px`;
+
+                newYesBtn.addEventListener('click', () => {
+                    container.innerHTML = '';
+                    const yayText = document.createElement('div');
+                    yayText.className = 'success-text';
+                    yayText.textContent = 'YAY!';
+                    container.appendChild(yayText);
+                    successGif.style.display = 'block';
+                    container.appendChild(successGif);
+                    
+                    // Add personal message
+                    const message = document.createElement('div');
+                    message.className = 'personal-message';
+                    message.innerHTML = `
+                I LOVE YOU CELINNNN, WAIT FOR THE VALENTINES DINNER!!!🌹🌹
+                    `;
+                    container.appendChild(message);
+                });
+
+                document.querySelector('.buttons').appendChild(newYesBtn);
+            }
+
+            if (noCount >= 5) {
+                noBtn.style.display = 'none';
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            container.innerHTML = '';
+            const yayText = document.createElement('div');
+            yayText.className = 'success-text';
+            yayText.textContent = 'YAY!';
+            container.appendChild(yayText);
+            successGif.style.display = 'block';
+            container.appendChild(successGif);
+            
+            // Add personal message
+            const message = document.createElement('div');
+            message.className = 'personal-message';
+            message.innerHTML = `
+                I LOVE YOU CELINNNN, WAIT FOR THE VALENTINES DINNER!!!🌹
+            `;
+            container.appendChild(message);
+        });
+    </script>
+</body>
+</html>
