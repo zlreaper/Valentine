@@ -64,6 +64,14 @@
             font-weight: bold;
             text-shadow: 3px 3px 0px #ff9999;
         }
+        .personal-message {
+            font-size: 24px;
+            color: #ff6b6b;
+            margin: 20px 0;
+            line-height: 1.5;
+            max-width: 600px;
+            text-align: center;
+        }
 
         @keyframes bounce {
             0%, 100% {
@@ -78,7 +86,7 @@
 <body>
     <div class="container">
         <img src="https://media.tenor.com/kgQfUEjcSdgAAAAj/milk-and-mocha.gif" alt="Valentine's gif" class="gif">
-        <h1>Wenwen, will you be my Valentine?</h1>
+        <h1>Angiee, will you be my Valentine?</h1>
         <div class="buttons">
             <button class="yes-btn">Yes</button>
             <button id="noBtn">No</button>
@@ -100,7 +108,6 @@
             noBtnSize = Math.max(8, noBtnSize - 2);
             btnSize += 8;
             
-            // Update all existing yes buttons
             document.querySelectorAll('.yes-btn').forEach(btn => {
                 btn.style.fontSize = `${btnSize}px`;
                 btn.style.padding = `${10 + btnSize/2}px ${20 + btnSize}px`;
@@ -108,7 +115,6 @@
             
             noBtn.style.fontSize = `${noBtnSize}px`;
 
-            // Create two new yes buttons
             for (let i = 0; i < 2; i++) {
                 const newYesBtn = document.createElement('button');
                 newYesBtn.textContent = 'Yes';
@@ -116,7 +122,6 @@
                 newYesBtn.style.fontSize = `${btnSize}px`;
                 newYesBtn.style.padding = `${10 + btnSize/2}px ${20 + btnSize}px`;
 
-                // Add the same click event to new buttons
                 newYesBtn.addEventListener('click', () => {
                     container.innerHTML = '';
                     const yayText = document.createElement('div');
@@ -125,6 +130,14 @@
                     container.appendChild(yayText);
                     successGif.style.display = 'block';
                     container.appendChild(successGif);
+                    
+                    // Add personal message
+                    const message = document.createElement('div');
+                    message.className = 'personal-message';
+                    message.innerHTML = `
+                Angie I knew u'd say yes!!!🌹🌹
+                    `;
+                    container.appendChild(message);
                 });
 
                 document.querySelector('.buttons').appendChild(newYesBtn);
@@ -143,6 +156,14 @@
             container.appendChild(yayText);
             successGif.style.display = 'block';
             container.appendChild(successGif);
+            
+            // Add personal message
+            const message = document.createElement('div');
+            message.className = 'personal-message';
+            message.innerHTML = `
+                I knew u'd say yes!!!🌹
+            `;
+            container.appendChild(message);
         });
     </script>
 </body>
